@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.pizzamania">
+
+    <!-- Permissions (if you add internet, GPS, etc. later) -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Pizza Mania"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        <!-- Splash Screen -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Login Screen -->
+        <activity android:name=".LoginActivity" />
+
+        <!-- Register Screen -->
+        <activity android:name=".RegisterActivity" />
+
+        <!-- Menu Screen -->
+        <activity android:name=".MenuActivity" />
+
+        <!-- Order Screen -->
+        <activity android:name=".OrderActivity" />
+
+        <!-- Branch Info Screen -->
+        <activity android:name=".BranchActivity" />
+
+    </application>
+</manifest>
