@@ -8,12 +8,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pizza Menu"
-        android:textSize="24sp"
+        android:background="#FFCC80"
         android:gravity="center"
         android:padding="10dp"
+        android:text="Pizza Menu"
+        android:textSize="24sp"
         android:textStyle="bold"
-        android:background="#FFCC80" />
+        android:layout_marginTop="40dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
