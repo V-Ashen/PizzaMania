@@ -1,5 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Orange theme -->
+    <color name="orange_500">#FF9800</color>
+    <color name="orange_700">#F57C00</color>
+    <color name="orange_200">#FFCC80</color>
+
+    <!-- Neutrals -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="Dark_Gray">#A9A9A9</color>
+
+    <!-- Navigation specific -->
+    <color name="nav_text">#212121</color> <!-- Dark grey text -->
+
 </resources>

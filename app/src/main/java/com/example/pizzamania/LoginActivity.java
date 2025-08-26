@@ -1,19 +1,17 @@
 package com.example.pizzamania;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText username, password;
-    Button loginBtn, registerBtn;
+    EditText editUsername, editPassword;
+    Button btnLogin , btnDoRegister;
     DBHelper db;
 
     @Override
@@ -21,27 +19,50 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        username = findViewById(R.id.editUsername);
-        password = findViewById(R.id.editPassword);
-        loginBtn = findViewById(R.id.btnLogin);
-        registerBtn = findViewById(R.id.btnRegister);
-
+        editUsername = findViewById(R.id.editUsername);
+        editPassword = findViewById(R.id.editPassword);
+        btnLogin = findViewById(R.id.btnLogin);
         db = new DBHelper(this);
+        btnDoRegister = findViewById(R.id.btnDoRegister);
 
-        loginBtn.setOnClickListener(v -> {
-            String user = username.getText().toString();
-            String pass = password.getText().toString();
+        btnLogin.setOnClickListener(v -> {
+            String user = editUsername.getText().toString();
+            String pass = editPassword.getText().toString();
 
-            if (db.checkUser(user, pass)) {
-                Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, MenuActivity.class));
-            } else {
-                Toast.makeText(this, "Invalid Login", Toast.LENGTH_SHORT).show();
+            if ((user.equals("staff") && pass.equals("staff123"))) {
+                // staff login
+                SharedPreferences sp = getSharedPreferences("UserSession", MODE_PRIVATE);
+                sp.edit().putString("role", "staff").apply();
+                startActivity(new Intent(this, StaffDashboardActivity.class));
+                finish();
             }
+            else if ((user.equals("driver") && pass.equals("driver123"))) {
+                // driver login
+                SharedPreferences sp = getSharedPreferences("UserSession", MODE_PRIVATE);
+                sp.edit().putString("role", "driver").apply();
+                startActivity(new Intent(this, DriverDashboardActivity.class));
+                finish();
+            }
+            else if (db.checkUser(user, pass)) {
+                // customer login (from DB)
+                SharedPreferences sp = getSharedPreferences("UserSession", MODE_PRIVATE);
+                sp.edit()
+                        .putString("username", user)
+                        .putString("role", "customer")
+                        .apply();
+
+                startActivity(new Intent(this, MenuActivity.class));
+                finish();
+            }
+            else {
+                Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show();
+            }
+
+
+            findViewById(R.id.btnDoRegister).setOnClickListener(view ->
+                    startActivity(new Intent(this, RegisterActivity.class)));
+
         });
 
-        registerBtn.setOnClickListener(v -> {
-            startActivity(new Intent(this, RegisterActivity.class));
-        });
     }
 }

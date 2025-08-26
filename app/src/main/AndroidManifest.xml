@@ -13,7 +13,11 @@
         android:label="Pizza Mania"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        android:theme="@style/Theme.PizzaMania">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key"/>
 
         <!-- Splash Screen -->
         <activity
@@ -35,10 +39,20 @@
         <activity android:name=".MenuActivity" />
 
         <!-- Order Screen -->
-        <activity android:name=".OrderActivity" />
+       <!--<activity android:name=".OrderActivity" /> -->
 
         <!-- Branch Info Screen -->
         <activity android:name=".BranchActivity" />
+
+        <activity android:name=".CartActivity"/>
+        <activity android:name=".StaffDashboardActivity"/>
+        <activity android:name=".DriverDashboardActivity"/>
+        <activity android:name=".CustomerTrackingActivity"/>
+
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".OrderHistoryActivity" />
+        <activity android:name=".TrackOrderActivity" />
+
 
     </application>
 </manifest>

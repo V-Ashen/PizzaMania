@@ -5,31 +5,31 @@
     android:orientation="vertical"
     android:padding="20dp"
     android:gravity="center"
-    android:background="#E8F5E9">
+    android:background="#FFF3E0">
 
     <EditText
-        android:id="@+id/editUsername"
+        android:id="@+id/editRegUsername"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Username"
+        android:layout_height="wrap_content" android:textColor="@color/black"
+        android:hint="New Username" android:textColorHint="@color/Dark_Gray"
         android:padding="12dp" />
 
     <EditText
-        android:id="@+id/editPassword"
+        android:id="@+id/editRegPassword"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"
+        android:layout_height="wrap_content" android:textColor="@color/black"
+        android:hint="New Password" android:textColorHint="@color/Dark_Gray"
         android:inputType="textPassword"
         android:padding="12dp"
         android:layout_marginTop="10dp" />
 
     <Button
-        android:id="@+id/btnRegister"
+        android:id="@+id/btnDoRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Register"
         android:layout_marginTop="15dp"
-        android:backgroundTint="#4CAF50"
+        android:backgroundTint="#FF9800"
         android:textColor="@android:color/white" />
 
 </LinearLayout>

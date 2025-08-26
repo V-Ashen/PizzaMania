@@ -11,8 +11,8 @@ import java.util.ArrayList;
 
 public class PizzaAdapter extends RecyclerView.Adapter<PizzaAdapter.PizzaViewHolder> {
 
-    ArrayList<Pizza> pizzaList;
-    OnPizzaClickListener listener;
+    private ArrayList<Pizza> pizzaList;
+    private OnPizzaClickListener listener;
 
     public interface OnPizzaClickListener {
         void onPizzaClick(Pizza pizza);
@@ -26,7 +26,8 @@ public class PizzaAdapter extends RecyclerView.Adapter<PizzaAdapter.PizzaViewHol
     @NonNull
     @Override
     public PizzaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pizza, parent, false);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_pizza, parent, false);
         return new PizzaViewHolder(view);
     }
 
@@ -34,8 +35,8 @@ public class PizzaAdapter extends RecyclerView.Adapter<PizzaAdapter.PizzaViewHol
     public void onBindViewHolder(@NonNull PizzaViewHolder holder, int position) {
         Pizza pizza = pizzaList.get(position);
         holder.name.setText(pizza.name);
-        holder.price.setText(pizza.price);
-        holder.image.setImageResource(pizza.image);
+        holder.price.setText(pizza.priceText);
+        holder.image.setImageResource(pizza.imageResId);
 
         holder.itemView.setOnClickListener(v -> listener.onPizzaClick(pizza));
     }
