@@ -29,7 +29,7 @@
             android:id="@+id/btnViewCart"
             android:layout_width="match_parent"
             android:layout_height="69dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="0dp"
             android:text="View Cart" />
     </LinearLayout>
 

@@ -45,9 +45,11 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         pizzaList = new ArrayList<>();
-        pizzaList.add(new Pizza("Cheese Pizza", "1200 LKR", 1200, R.drawable.cheese));
+        pizzaList.add(new Pizza("Cheese Pizza", "1300 LKR", 1300, R.drawable.cheese));
         pizzaList.add(new Pizza("Chicken Pizza", "1500 LKR", 1500, R.drawable.chicken));
         pizzaList.add(new Pizza("Veg Pizza", "1000 LKR", 1000, R.drawable.veg));
+        pizzaList.add(new Pizza("Sausage Pizza", "1200 LKR", 1200, R.drawable.sausage));
+        pizzaList.add(new Pizza("Pepsi", "500 LKR", 500, R.drawable.pepsi));
 
         PizzaAdapter adapter = new PizzaAdapter(pizzaList, pizza -> {
             CartManager.getInstance().add(pizza);

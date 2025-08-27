@@ -11,5 +11,6 @@
         android:layout_height="wrap_content"
         android:text="Tracking Order..."
         android:textSize="18sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
 </LinearLayout>

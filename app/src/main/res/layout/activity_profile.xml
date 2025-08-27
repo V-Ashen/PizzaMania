@@ -12,7 +12,8 @@
         android:layout_marginLeft="40dp"
         android:text="Customer Name"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
 
     <Button
         android:id="@+id/btnDeleteAccount"
