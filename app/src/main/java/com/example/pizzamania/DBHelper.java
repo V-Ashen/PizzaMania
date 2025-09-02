@@ -131,5 +131,28 @@ public class DBHelper extends SQLiteOpenHelper {
         return result > 0;
     }
 
+    public double getCustomerLat(long orderId) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT custLat FROM orders WHERE id=?", new String[]{String.valueOf(orderId)});
+        if (c.moveToFirst()) {
+            double lat = c.getDouble(0);
+            c.close();
+            return lat;
+        }
+        c.close();
+        return 0; // or some default
+    }
+
+    public double getCustomerLng(long orderId) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT custLng FROM orders WHERE id=?", new String[]{String.valueOf(orderId)});
+        if (c.moveToFirst()) {
+            double lng = c.getDouble(0);
+            c.close();
+            return lng;
+        }
+        c.close();
+        return 0; // or some default
+    }
 
 }

@@ -2,23 +2,36 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:textColor="@color/black">
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/tvDriverTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Approved Orders for Delivery"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="12dp"/>
 
     <ListView
         android:id="@+id/listApproved"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="30dp"
         android:layout_weight="1"
-        android:textColor="@color/black"
         android:divider="@android:color/darker_gray"
-    />
+        android:textColor="@color/black"
+        android:dividerHeight="1dp"/>
 
     <Button
         android:id="@+id/btnPicked"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Mark Picked Up (Start trip)"/>
+        android:layout_marginTop="16dp"
+        android:text="Mark Picked Up (Start Trip)"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/orange_500"/>
 
 </LinearLayout>

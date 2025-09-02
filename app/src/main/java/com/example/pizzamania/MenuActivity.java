@@ -78,6 +78,11 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             smsIntent.putExtra("sms_body", "Hello PizzaMania Colombo branch, I need help with my order.");
             startActivity(smsIntent);
         }
+        else if (id == R.id.nav_branches) {
+            Intent intent = new Intent(MenuActivity.this, BranchesActivity.class);
+            startActivity(intent);
+        }
+
         else if (id == R.id.nav_logout) {
             // Clear session
             SharedPreferences sp = getSharedPreferences("UserSession", MODE_PRIVATE);

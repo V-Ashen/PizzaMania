@@ -106,11 +106,12 @@ public class ReviewActivity extends AppCompatActivity {
 
     private void openCamera() {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (cameraIntent.resolveActivity(getPackageManager()) != null) {
-            takePhotoLauncher.launch(cameraIntent);
-        } else {
-            Toast.makeText(this, "No camera app found on this device", Toast.LENGTH_SHORT).show();
-        }
+        takePhotoLauncher.launch(cameraIntent);
+//        if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+//            takePhotoLauncher.launch(cameraIntent);
+//        } else {
+//            Toast.makeText(this, "No camera app found on this device", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     private void uploadReview() {

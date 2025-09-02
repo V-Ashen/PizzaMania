@@ -52,7 +52,8 @@
        <!--<activity android:name=".OrderActivity" /> -->
 
         <!-- Branch Info Screen -->
-        <activity android:name=".BranchActivity" />
+        <activity android:name=".BranchesActivity" />
+
 
         <activity android:name=".ReviewActivity" />
         <activity android:name=".ReviewListActivity" />

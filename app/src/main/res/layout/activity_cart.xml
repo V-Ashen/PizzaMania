@@ -1,18 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:padding="10dp">
+    android:layout_height="match_parent" android:padding="12dp"
+    android:background="@color/white">
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cartRecycler" android:layout_width="match_parent"
-        android:layout_height="0dp" android:layout_weight="1"
-        android:layout_marginTop="30dp"/>
+        android:id="@+id/cartRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
     <TextView
-        android:id="@+id/textTotalCost" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:text="Total: 0 LKR" android:textColor="@color/black"
-        android:textStyle="bold" android:textSize="18sp" android:padding="8dp"/>
-    <EditText
-        android:id="@+id/editAddress" android:layout_width="match_parent"  android:textColorHint="@color/Dark_Gray"
-        android:textColor="@color/black" android:layout_height="wrap_content" android:hint="Delivery Address" />
+        android:id="@+id/textTotalCost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total: 0 LKR"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:paddingTop="8dp"
+        android:textColor="@color/black"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="8dp">
+
+        <EditText
+            android:id="@+id/editAddress"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="Delivery address"
+            android:textColor="@color/black"
+            android:padding="10dp" />
+
+        <Button
+            android:id="@+id/btnUseLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Use My Location"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
+
     <Button
-        android:id="@+id/btnConfirmOrder" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:text="Confirm Order"/>
+        android:id="@+id/btnConfirmOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirm Order"
+        android:layout_marginTop="10dp"/>
 </LinearLayout>
