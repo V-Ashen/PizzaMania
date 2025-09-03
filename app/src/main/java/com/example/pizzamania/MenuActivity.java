@@ -33,9 +33,14 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         // Drawer setup
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {   // set toolbar title
+            getSupportActionBar().setTitle("Pizza Mania");
+        }
+
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navigationView);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
@@ -59,11 +64,12 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
         findViewById(R.id.btnViewCart).setOnClickListener(v ->
                 startActivity(new Intent(this, CartActivity.class)));
-    }
+    }  // ✅ properly closed onCreate()
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+
         if (id == R.id.nav_profile) {
             startActivity(new Intent(this, ProfileActivity.class));
         } else if (id == R.id.nav_history) {
@@ -73,22 +79,15 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_track) {
             startActivity(new Intent(this, TrackOrderActivity.class));
         } else if (id == R.id.nav_contact) {
-            // Example: open SMS for Colombo branch
             Intent smsIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:+94783536671"));
             smsIntent.putExtra("sms_body", "Hello PizzaMania Colombo branch, I need help with my order.");
             startActivity(smsIntent);
-        }
-        else if (id == R.id.nav_branches) {
-            Intent intent = new Intent(MenuActivity.this, BranchesActivity.class);
-            startActivity(intent);
-        }
-
-        else if (id == R.id.nav_logout) {
-            // Clear session
+        } else if (id == R.id.nav_branches) {
+            startActivity(new Intent(this, BranchesActivity.class));
+        } else if (id == R.id.nav_logout) {
             SharedPreferences sp = getSharedPreferences("UserSession", MODE_PRIVATE);
             sp.edit().clear().apply();
 
-            // Go back to LoginActivity
             Intent i = new Intent(this, LoginActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
@@ -98,5 +97,4 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
-
 }
