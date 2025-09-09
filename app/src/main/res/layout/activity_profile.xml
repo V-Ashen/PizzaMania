@@ -1,25 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:background="@color/white">
 
-    <TextView
-        android:id="@+id/txtProfileName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="40dp"
-        android:text="Customer Name"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"/>
+    <!-- Toolbar with Back Button -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        app:navigationIcon="@drawable/back_icon"
+        app:title="Profile"
+        app:titleTextColor="@color/black"
+        app:titleTextAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-    <Button
-        android:id="@+id/btnDeleteAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="40dp"
-        android:text="Delete Account" />
+    <!-- Main Profile Content -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="24dp">
+
+        <!-- Profile Picture -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_person"
+            android:contentDescription="Profile Picture"
+            android:scaleType="centerCrop"
+
+            android:layout_marginTop="40dp" />
+
+        <!-- Profile Name -->
+        <TextView
+            android:id="@+id/txtProfileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Customer Name"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/black" />
+
+        <!-- Email (optional) -->
+        <TextView
+            android:id="@+id/txtProfileEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="customer@email.com"
+            android:textSize="14sp"
+            android:textColor="@color/grey_600" />
+
+        <!-- Delete Account Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDeleteAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Delete Account"
+            android:textAllCaps="false"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/ic_delete"
+            app:iconTint="@android:color/white"
+            app:backgroundTint="@color/red_500"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
 </LinearLayout>
