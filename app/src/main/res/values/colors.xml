@@ -3,11 +3,16 @@
     <color name="orange_500">#FF9800</color>
     <color name="orange_700">#F57C00</color>
     <color name="orange_200">#FFCC80</color>
-
+    <color name="light_grays">#1B646464</color>
     <!-- Neutrals -->
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="Dark_Gray">#A9A9A9</color>
+    <color name="grey_800">#A9A9A9</color>
+    <color name="grey_600">#757575</color>
+    <color name="grey_200">#d8d8d8</color>
+    <color name="red_500">#fc0000</color>
+    <color name="green_600">#00a15b</color>
 
     <!-- Navigation specific -->
     <color name="nav_text">#212121</color> <!-- Dark grey text -->

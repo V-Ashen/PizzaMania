@@ -20,38 +20,24 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        // Enable back button in action bar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
         txtName = findViewById(R.id.txtProfileName);
         btnDelete = findViewById(R.id.btnDeleteAccount);
         db = new DBHelper(this);
 
-        SharedPreferences sp = getSharedPreferences("UserSession", MODE_PRIVATE);
-        String username = sp.getString("username", null);
-
-        if (username == null) {
-            startActivity(new Intent(this, LoginActivity.class));
-            finish();
-            return;
-        }
-
-        txtName.setText("Welcome, " + username);
-
-        btnDelete.setOnClickListener(v -> {
-            new AlertDialog.Builder(this)
-                    .setTitle("Delete Account")
-                    .setMessage("Are you sure you want to delete this account?")
-                    .setPositiveButton("Yes", (dialog, which) -> {
-                        if (db.deleteUser(username)) {
-                            // clear session
-                            sp.edit().clear().apply();
-                            Toast.makeText(this, "Account deleted", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(this, LoginActivity.class));
-                            finish();
-                        } else {
-                            Toast.makeText(this, "Failed to delete", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .setNegativeButton("No", null)
-                    .show();
-        });
+        // Existing code...
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        // Go back when the back button in the toolbar is clicked
+        onBackPressed();
+        return true;
+    }
+
 }

@@ -1,46 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:background="@color/white">
 
     <!-- Main Content -->
-    <LinearLayout
-        android:orientation="vertical"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:layout_height="match_parent">
 
-        <!-- Toolbar -->
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:fitsSystemWindows="true" />
-
-        <!-- Pizza list -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:textColor="@color/black" />
-
-        <!-- Cart button -->
-        <Button
-            android:id="@+id/btnViewCart"
+        <!-- App Bar -->
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="View Cart"
-            android:backgroundTint="@color/orange_500"
-            android:textColor="@android:color/white" />
+            android:background="@color/white"
+            android:elevation="0dp">
 
-    </LinearLayout>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/white"
+                app:title="Pizza Mania"
+                app:titleTextColor="@color/black"
+                app:titleTextAppearance="@style/TextAppearance.AppCompat.Medium"
+                app:navigationIcon="@drawable/ic_menu" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!-- Main scrolling content -->
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Search Bar -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    app:cardCornerRadius="25dp"
+                    app:cardElevation="3dp"
+                    android:layout_marginBottom="16dp">
+
+                    <androidx.appcompat.widget.SearchView
+                        android:id="@+id/searchView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        app:iconifiedByDefault="false"
+                        app:queryHint="Search your pizza..." />
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Category Tabs -->
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    app:tabIndicatorColor="@color/orange_500"
+                    app:tabMode="scrollable"
+                    app:tabSelectedTextColor="@color/orange_500"
+                    app:tabTextColor="@color/grey_600" />
+
+                <!-- Featured section -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Featured Pizzas 🍕"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/featuredRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:clipToPadding="false"
+                    android:paddingTop="8dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                <!-- All Pizzas section -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="All Pizzas"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    tools:listitem="@layout/item_pizza_card" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <!-- Bottom App Bar with FAB -->
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:backgroundTint="@color/white"
+            app:fabCradleMargin="8dp"
+            app:fabCradleRoundedCornerRadius="20dp"
+            app:fabAlignmentMode="center">
+
+            <!-- Optional navigation items -->
+        </com.google.android.material.bottomappbar.BottomAppBar>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnViewCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_cart"
+            app:tint="@android:color/white"
+            android:contentDescription="View Cart"
+            app:backgroundTint="@color/orange_500"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="16dp" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <!-- Side Navigation Drawer -->
     <com.google.android.material.navigation.NavigationView
@@ -48,12 +145,12 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:menu="@menu/nav_menu"
+        android:background="@color/white"
+        android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header"
-        app:itemTextColor="@color/nav_text"
         app:itemIconTint="@color/orange_500"
         app:itemRippleColor="@color/orange_200"
-        android:background="@color/white"
-        android:fitsSystemWindows="true" />
+        app:itemTextColor="@color/nav_text"
+        app:menu="@menu/nav_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

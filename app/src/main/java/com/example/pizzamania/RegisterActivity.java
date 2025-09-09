@@ -1,8 +1,10 @@
 package com.example.pizzamania;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +14,8 @@ public class RegisterActivity extends AppCompatActivity {
     Button btnRegister;
     DBHelper db;
 
+    TextView login;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
         username = findViewById(R.id.editRegUsername);
         password = findViewById(R.id.editRegPassword);
         btnRegister = findViewById(R.id.btnDoRegister);
+        login= findViewById(R.id.btnLogin);
 
         db = new DBHelper(this);
 
@@ -39,5 +44,6 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(this, "User Already Exists", Toast.LENGTH_SHORT).show();
             }
         });
+        login.setOnClickListener(view -> startActivity(new Intent(this, LoginActivity.class)));
     }
 }
