@@ -30,8 +30,37 @@ public class ProfileActivity extends AppCompatActivity {
         btnDelete = findViewById(R.id.btnDeleteAccount);
         db = new DBHelper(this);
 
-        // Existing code...
+        SharedPreferences sp = getSharedPreferences("UserSession", MODE_PRIVATE);
+        String username = sp.getString("username", null);
+
+        if (username == null) {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+            return;
+        }
+
+        txtName.setText("Welcome, " + username);
+
+        btnDelete.setOnClickListener(v -> {
+            new AlertDialog.Builder(this)
+                    .setTitle("Delete Account")
+                    .setMessage("Are you sure you want to delete this account?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        if (db.deleteUser(username)) {
+                            // clear session
+                            sp.edit().clear().apply();
+                            Toast.makeText(this, "Account deleted", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(this, LoginActivity.class));
+                            finish();
+                        } else {
+                            Toast.makeText(this, "Failed to delete", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+        });
     }
+
 
     @Override
     public boolean onSupportNavigateUp() {
