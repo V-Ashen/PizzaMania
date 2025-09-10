@@ -45,32 +45,32 @@
                 android:padding="16dp">
 
                 <!-- Search Bar -->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    app:cardCornerRadius="25dp"
-                    app:cardElevation="3dp"
-                    android:layout_marginBottom="16dp">
+<!--                <com.google.android.material.card.MaterialCardView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    app:cardCornerRadius="25dp"-->
+<!--                    app:cardElevation="3dp"-->
+<!--                    android:layout_marginBottom="16dp">-->
 
-                    <androidx.appcompat.widget.SearchView
-                        android:id="@+id/searchView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@android:color/transparent"
-                        app:iconifiedByDefault="false"
-                        app:queryHint="Search your pizza..." />
-                </com.google.android.material.card.MaterialCardView>
+<!--                    <androidx.appcompat.widget.SearchView-->
+<!--                        android:id="@+id/searchView"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        app:iconifiedByDefault="false"-->
+<!--                        app:queryHint="Search your pizza..." />-->
+<!--                </com.google.android.material.card.MaterialCardView>-->
 
                 <!-- Category Tabs -->
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tabLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    app:tabIndicatorColor="@color/orange_500"
-                    app:tabMode="scrollable"
-                    app:tabSelectedTextColor="@color/orange_500"
-                    app:tabTextColor="@color/grey_600" />
+<!--                <com.google.android.material.tabs.TabLayout-->
+<!--                    android:id="@+id/tabLayout"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@color/white"-->
+<!--                    app:tabIndicatorColor="@color/orange_500"-->
+<!--                    app:tabMode="scrollable"-->
+<!--                    app:tabSelectedTextColor="@color/orange_500"-->
+<!--                    app:tabTextColor="@color/grey_600" />-->
 
                 <!-- Featured section -->
                 <TextView
