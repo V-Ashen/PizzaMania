@@ -1,35 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    The root is now a LinearLayout. NO ScrollView is needed.
+    This layout will intelligently distribute space.
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@color/white">
+    android:padding="12dp">
 
     <TextView
-        android:id="@+id/txtTitle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Pending Orders"
-        android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
-        android:padding="8dp"/>
+        android:textSize="18sp"/>
 
+    <!-- This ListView now has a weight, so it can shrink on small screens -->
     <ListView
         android:id="@+id/listPending"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:divider="@android:color/darker_gray"
-        android:dividerHeight="1dp"
-        android:padding="8dp"/>
+        android:divider="#CCC"
+        android:dividerHeight="1dp"/>
 
     <Button
         android:id="@+id/btnViewReviews"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="View Reviews"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="@color/orange_500"
-        android:textColor="@android:color/white"/>
+        android:layout_marginTop="8dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DDD"
+        android:layout_marginTop="12dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Manage Menu (toggle availability)"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginTop="12dp"/>
+
+    <!-- This ListView also has a weight. It will share space with the one above. -->
+    <ListView
+        android:id="@+id/listMenu"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:divider="#EEE"
+        android:dividerHeight="1dp"
+        android:layout_marginBottom="16dp"/>
+
 </LinearLayout>

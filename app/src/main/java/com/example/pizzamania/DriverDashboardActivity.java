@@ -39,7 +39,11 @@ public class DriverDashboardActivity extends AppCompatActivity {
     LocationRequest req;
     LocationCallback callback;
 
-    @Override protected void onCreate(Bundle b) {
+    // 👇 Added field: which branch this driver belongs to
+    int branchId = 1; // default Colombo, you can pass dynamically at login
+
+    @Override
+    protected void onCreate(Bundle b) {
         super.onCreate(b);
         setContentView(R.layout.activity_driver_dashboard);
         db = new DBHelper(this);
@@ -50,7 +54,7 @@ public class DriverDashboardActivity extends AppCompatActivity {
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
                 TextView tv = view.findViewById(android.R.id.text1);
-                tv.setTextColor(getResources().getColor(android.R.color.black)); // force black
+                tv.setTextColor(getResources().getColor(android.R.color.black));
                 return view;
             }
         };
@@ -59,34 +63,37 @@ public class DriverDashboardActivity extends AppCompatActivity {
 
         lv.setOnItemClickListener((p, v, pos, id) -> {
             currentOrderId = ids.get(pos);
-            db.assignDriver(currentOrderId, "Driver1");
-            Toast.makeText(this, "Selected order #"+currentOrderId, Toast.LENGTH_SHORT).show();
+            db.assignDriver(currentOrderId, "Driver1"); // you can replace with logged-in driver name
+            Toast.makeText(this, "Selected order #" + currentOrderId, Toast.LENGTH_SHORT).show();
         });
 
         findViewById(R.id.btnPicked).setOnClickListener(v -> {
             if (currentOrderId == -1) {
-                Toast.makeText(this,"Select an order first",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Select an order first", Toast.LENGTH_SHORT).show();
                 return;
             }
             db.updateStatus(currentOrderId, "OnTheWay");
 
-            // Get customer location from DB
             double lat = db.getCustomerLat(currentOrderId);
             double lng = db.getCustomerLng(currentOrderId);
 
-            openGoogleMaps(lat, lng);  // 🚀 open Google Maps
-            //startDriverLocationUpdates();  // 🚀 start driver location updates
+            openGoogleMaps(lat, lng);
 
-        Toast.makeText(this, "Marked Picked Up. Customer will be notified.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Marked Picked Up. Customer will be notified.", Toast.LENGTH_SHORT).show();
         });
 
         fused = LocationServices.getFusedLocationProviderClient(this);
+
+        // ✅ Load orders for this driver’s branch
         load();
     }
 
     private void load() {
-        adapter.clear(); ids.clear();
-        Cursor c = db.getOrdersByStatus("Approved");
+        adapter.clear();
+        ids.clear();
+
+        // ✅ FIXED: pass branchId
+        Cursor c = db.getOrdersByStatus("Approved", branchId);
         while (c.moveToNext()) {
             long id = c.getLong(c.getColumnIndexOrThrow("id"));
             String items = c.getString(c.getColumnIndexOrThrow("items"));
@@ -94,16 +101,19 @@ public class DriverDashboardActivity extends AppCompatActivity {
             double lat = c.getDouble(c.getColumnIndexOrThrow("custLat"));
             double lng = c.getDouble(c.getColumnIndexOrThrow("custLng"));
 
-            adapter.add("#"+id+" | "+items+"\nAddr: "+(address==null?"":address)+"\n("+lat+", "+lng+")\n(tap to select)");
+            adapter.add("#" + id + " | " + items +
+                    "\nAddr: " + (address == null ? "" : address) +
+                    "\n(" + lat + ", " + lng + ")\n(tap to select)");
             ids.add(id);
         }
+        c.close();
         adapter.notifyDataSetChanged();
     }
 
     private void startDriverLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 3001);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 3001);
             return;
         }
         req = LocationRequest.create();
@@ -112,7 +122,8 @@ public class DriverDashboardActivity extends AppCompatActivity {
         req.setPriority(Priority.PRIORITY_HIGH_ACCURACY);
 
         callback = new LocationCallback() {
-            @Override public void onLocationResult(@NonNull LocationResult result) {
+            @Override
+            public void onLocationResult(@NonNull LocationResult result) {
                 if (currentOrderId == -1) return;
                 if (result.getLastLocation() != null) {
                     db.updateDriverLocation(currentOrderId,
@@ -124,29 +135,35 @@ public class DriverDashboardActivity extends AppCompatActivity {
         fused.requestLocationUpdates(req, callback, Looper.getMainLooper());
     }
 
-    @Override protected void onDestroy() {
+    @Override
+    protected void onDestroy() {
         super.onDestroy();
-        if (fused!=null && callback!=null) fused.removeLocationUpdates(callback);
+        if (fused != null && callback != null) fused.removeLocationUpdates(callback);
     }
 
     private void openGoogleMaps(double customerLat, double customerLng) {
-        // Colombo branch coordinates (example: Galle Road Colombo)
-        double branchLat = 6.9271;
-        double branchLng = 79.8612;
+        // ✅ Instead of hardcoding, pick branch by branchId
+        double branchLat, branchLng;
 
-        // Google Maps direction URL
+        if (branchId == 1) { // Colombo
+            branchLat = 6.9271;
+            branchLng = 79.8612;
+        } else { // Galle
+            branchLat = 6.0535;
+            branchLng = 80.2210;
+        }
+
         String uri = "https://www.google.com/maps/dir/?api=1" +
                 "&origin=" + branchLat + "," + branchLng +
                 "&destination=" + customerLat + "," + customerLng +
                 "&travelmode=driving";
 
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-        intent.setPackage("com.google.android.apps.maps"); // force open in Google Maps
+        intent.setPackage("com.google.android.apps.maps");
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         } else {
             Toast.makeText(this, "Google Maps not installed!", Toast.LENGTH_SHORT).show();
         }
     }
-
 }
